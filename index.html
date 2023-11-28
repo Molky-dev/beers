@@ -23,6 +23,19 @@
     <input type="text" name="image_url" id="image_url" placeholder="image_url">
     <input type="submit" value="Add Beer">
   </form>
+
+  <div class="add-button">
+    <div class="top">
+      <span>L'application Beers, faites pour tous les alcooliques directement sur votre smartphone ou ordinateur !</span>
+    </div>
+    <div class="bottom">
+      <div class="whitespace"></div>
+      <button id="validApp">Install App</button>
+      <button id="decline">Decline</button>
+      <div class="whitespace"></div>
+    </div>
+  </div>
+
   <div class="container mt-5">
     <h1 class="mb-4">Beer List</h1>
     <!-- Search Bar -->
@@ -40,6 +53,7 @@
   <script src="fetch.js"></script>
   <script src="workers.js"></script>
   <script>
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/workers.js')
         .then(registration => {
@@ -49,6 +63,44 @@
           console.log("Erreur lors de l'enregistrement du Service Worker.", error);
         });
     }
+
+
+    let deferredPrompt;
+    const addBtn = document.querySelector('.add-button');
+    const InstallApp = document.querySelector('#validApp');
+    const Decline = document.querySelector('#decline');
+
+    addBtn.style.display = 'none';
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+
+      e.preventDefault();
+
+      deferredPrompt = e;
+
+      addBtn.style.display = 'flex';
+
+      InstallApp.addEventListener('click', () => {
+
+        addBtn.style.display = 'none';
+
+        deferredPrompt.prompt();
+
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the Metroville prompt');
+          } else {
+            console.log('User dismissed the Metroville prompt');
+          }
+          deferredPrompt = null;
+        });
+      });
+      Decline.addEventListener('click', () => {
+
+        addBtn.style.display = 'none';
+
+      });
+    });
     window.addEventListener('load', async () => {
       let db;
 
