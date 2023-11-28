@@ -1,7 +1,7 @@
 {
     "name": "Beers",
     "short_name": "Beers",
-    "start_url": "/index.html",
+    "start_url": "/beers/index.html",
     "display": "standalone",
     "background_color": "#000",
     "theme_color": "#000",
