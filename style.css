@@ -96,4 +96,16 @@
     .top span {
         font-size: 1em;
     }
+
+
+    .add-button button {
+        border-radius: 20%;
+        border: #aaa solid 2px;
+        color: #aaa;
+        font-size: 1em;
+        font-weight: 500;
+        background-color: rgba(0,0,0,0);
+        width: fit-content;
+        align-self: center;
+    }
 }
