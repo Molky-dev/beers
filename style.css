@@ -1,0 +1,27 @@
+.card-img-top {
+    margin: auto;
+    height: 400px;
+    width: auto;
+}
+
+.card-body {
+    display: none;
+    transform: rotateY(180deg);
+}
+
+.card {
+    height: 500px;
+}
+
+.card:hover {
+    transform: rotateY(180deg);
+    transition: all 1s;
+}
+
+.card:hover .card-body {
+    display: block;
+}
+
+.card:hover .card-img-top {
+    display: none;
+}
